@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const jimp = require("jimp");
 const db = require("quick.db");
-const ayarlar = require("./ayarlar.json");//sharpen creative
+const ayarlar = require("./ayarlar.json");//sharpen 
 const chalk = require("chalk");
 const fs = require("fs");
 const moment = require("moment");
@@ -15,7 +15,7 @@ require("./util/eventLoader")(client);
 const express = require("express");
 const app = express();
 const http = require("http");
-app.get("/", (request, response) => {//sharpen creative
+app.get("/", (request, response) => {//sharpen 
   console.log(`7/24 Hizmet Vermekteyim!`);
   response.sendStatus(200);
 });
@@ -24,7 +24,7 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
-//-------------------- 7/24 Uptime --------------------////sharpen creative
+//-------------------- 7/24 Uptime --------------------////sharpen 
 //-------------------- 7/24 Uptime --------------------//
 //-------------------- 7/24 Uptime --------------------//
 
@@ -56,7 +56,7 @@ fs.readdir("./komutlar/", (err, files) => {
 });
 client.reload = command => {
   return new Promise((resolve, reject) => {
-    try {//sharpen creative
+    try {//sharpen 
       delete require.cache[require.resolve(`./komutlar/${command}`)];
       let cmd = require(`./komutlar/${command}`);
       client.commands.delete(command);
@@ -83,7 +83,7 @@ client.load = command => {
       });
       resolve();
     } catch (e) {
-      reject(e);//sharpen creative
+      reject(e);//sharpen 
     }
   });
 };
@@ -91,12 +91,12 @@ client.unload = command => {
   return new Promise((resolve, reject) => {
     try {
       delete require.cache[require.resolve(`./komutlar/${command}`)];
-      let cmd = require(`./komutlar/${command}`);//lrowsxrd
+      let cmd = require(`./komutlar/${command}`);
       client.commands.delete(command);
       client.aliases.forEach((cmd, alias) => {
         if (cmd === command) client.aliases.delete(alias);
       });
-      resolve();//sharpen creative
+      resolve();//sharpen 
     } catch (e) {
       reject(e);
     }
@@ -113,4 +113,4 @@ client.elevation = message => {
   return permlvl;
 };
 
-client.login(ayarlar.token);//sharpen creative
+client.login(ayarlar.token);//sharpen 
