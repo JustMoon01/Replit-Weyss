@@ -28,7 +28,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'site',
+  name: 'site-stats',
   description: 'site atar',
   usage: '!site-bilgi'
 }; 
