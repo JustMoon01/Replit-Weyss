@@ -10,7 +10,7 @@ const exampleEmbed = new Discord.MessageEmbed()
  .setTitle(`${client.user.username}`)
  .setDescription(`• Yardım •
 
-!site
+!antiraid
 • Site'ye ulaşırsınız.
 
 !site-stats
