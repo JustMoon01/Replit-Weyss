@@ -11,7 +11,6 @@ const exampleEmbed = new Discord.MessageEmbed()
  .setDescription(`• Sitemiz •
 
 https://web.blackcodetr.cf/`)
-.setImage("https://cdn.discordapp.com/icons/823148112684122143/cca69e52463b396f03699cceed872466.webp?size=1024")
   message.channel.send(exampleEmbed)
   
   
