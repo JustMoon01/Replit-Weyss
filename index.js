@@ -312,7 +312,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     kanal.send(embed);
     
   }
-});  //Asreaper dan aldım
+});  
 
 //-------------------- Mod Log Sistemi Son --------------------//
 
