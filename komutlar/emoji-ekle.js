@@ -25,7 +25,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'kurallar',
-  description: 'kuralları atar',
-  usage: '!kurallar'
+  name: 'site',
+  description: 'site atar',
+  usage: '!site'
 }; 
