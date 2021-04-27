@@ -11,7 +11,7 @@ const exampleEmbed = new Discord.MessageEmbed()
  .setDescription(`• Sitemiz •
 Toplam Kod Sayısı 44
 Toplam Bot Sayısı 9
-Toplam Uptime Sayısı 48
+Toplam Uptime Sayısı 65
 
 `)
 
