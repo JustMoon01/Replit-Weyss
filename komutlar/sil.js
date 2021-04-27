@@ -17,13 +17,13 @@ exports.run = async (client, message, args) => {
   let sil = args[0];
 
   if (!sil) {
-    const eben = new Discord.MessageEmbed()
+    const şrpn = new Discord.MessageEmbed()
       .setAuthor("O Kadar Mesaji Neremle silecem")
       .setDescription(
-        `**Sadece 1-100 Adet Mesaj silebilirim ! \nMisal; ${ayarlar.prefix}sil 31**`
+        `**Sadece 1-100 Adet Mesaj silebilirim ! \nMisal; ${ayarlar.prefix}sil 10**`
       )
       .setColor("BLUE");
-    message.channel.send(eben);
+    message.channel.send(şrpn);
   }
 
   message.channel.bulkDelete(sil).then(() => {

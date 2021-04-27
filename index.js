@@ -462,3 +462,62 @@ client.on("message", msg => {
 });
 
 //REKLAM ENGEL
+
+//EVERYONE-HERE ENGEL
+
+client.on("message", async msg => {
+  let hereengelle = await db.fetch(`hereengel_${msg.guild.id}`);
+  if (hereengelle == "acik") {
+    const here = ["@here", "@everyone"];
+    if (here.some(word => msg.content.toLowerCase().includes(word))) {
+      if (!msg.member.permissions.has("ADMINISTRATOR")) {
+        msg.delete();
+        return msg
+          .reply("Yakaladım Seni! Everyone ve Here Etiketlemek Yasak.")
+          .then(wiskyx => wiskyx.delete({ timeout: 5000 }));
+      }
+    }
+  } else if (hereengelle == "kapali") {
+  }
+});
+
+//EVERYONE-HERE ENGEL SON
+
+
+//ANTİ RAİD
+
+client.on("guildMemberAdd", async member => {
+  let kanal =
+    (await db.fetch(`antiraidK_${member.guild.id}`)) == "anti-raid-aç";
+  if (!kanal) return;
+  var synx2 = member.guild.owner;
+  if (member.user.bot === true) {
+    if (db.fetch(`botizin_${member.guild.id}.${member.id}`) == "aktif") {
+      let synx = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setThumbnail(member.user.avatarURL())
+        .setDescription(
+          `**${member.user.tag}** (${member.id}) adlı bota bir yetkili izin verdi eğer kaldırmak istiyorsanız **!bot-izni kaldır <botid>**.`
+        );
+      synx2.send(synx);
+    } else {
+      let izinverilmemişbot = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setThumbnail(member.user.avatarURL())
+        .setDescription(
+          "**" +
+            member.user.tag +
+            "**" +
+            " (" +
+            member.id +
+            ") " +
+            "adlı bot sunucuya eklendi ve banladım eğer izin vermek istiyorsanız **" +
+            "!bot-izni ver <botid>**"
+        );
+      member.kick(); // Eğer sunucudan atmak istiyorsanız ban kısmını kick yapın
+      synx2.send(izinverilmemişbot);
+    }
+  }
+});
+
+//ANTİ RAİD SON
