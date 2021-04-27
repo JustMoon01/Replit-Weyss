@@ -113,4 +113,4 @@ client.elevation = message => {
   return permlvl;
 };
 
-client.login(ayarlar.token);//sharpen 
+client.login(process.env.token);//sharpen 
