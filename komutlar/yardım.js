@@ -1,36 +1,34 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 
+exports.run = (client, message, args) => {
+ const embed = new Discord.MessageEmbed()
+ .setAuthor(`${client.user.username} Yardım Menüsü`,client.user.avatarURL())
+ .setThumbnail(message.author.avatarURL())
+ .setColor('RANDOM')
+ .setDescription(`
+ > \`!antiraid -> Sunucuya izinsiz bot giremez.\`
 
-exports.run = async (client, message, args) => {
-  
-let user = message.mentions.users.first() || message.author  
-  
-const exampleEmbed = new Discord.MessageEmbed()
- .setColor("RANDOM")
- .setTitle(`${client.user.username}`)
- .setDescription(`• Yardım •
+ > \`!antiraidbotizni -> Botun sunucuya girmesi için izin verirsiniz.\` 
 
-!antiraid
-• Site'ye ulaşırsınız.
+ > \`!ban -> Üyeyi banlarsın.\`
+ 
+ > \`!ban -> Üyeyi banlarsın.\`
+ > \`s!davet -> Botun Davetini ve Destek Sunucunu gösterir.\``)
+ .setFooter(`Sharpen Sunar .`)
+    .setTimestamp()
+message.channel.send(embed) 
+//sharpen
+};
 
-!site-stats
-• Site istatistiklerine ulaşırsınız.
-
-•Herhangi bir sorununuz varsa yetkiliye danışınız`)
-  message.channel.send(exampleEmbed)
-  
-  
-}
-  
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["y","yardım"],
+  aliases: [],
   permLevel: 0
 };
 
 exports.help = {
-  name: 'kurallar',
-  description: 'kuralları atar',
-  usage: '!yardım'
-}; 
+  name: 'yardım',   //sharpen
+  description: '',
+  usage: ''
+};
