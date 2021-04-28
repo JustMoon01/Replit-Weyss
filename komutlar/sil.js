@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
 
   if (!sil) {
     const şrpn = new Discord.MessageEmbed()
-      .setAuthor("O Kadar Mesaji Neremle silecem")
+      .setAuthor("o kadar mesajı malesef silemem")
       .setDescription(
         `**Sadece 1-100 Adet Mesaj silebilirim ! \nMisal; ${ayarlar.prefix}sil 10**`
       )

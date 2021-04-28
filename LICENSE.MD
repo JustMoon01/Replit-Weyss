@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2021 yigitdem6110
+Copyright (c) 2021 Sharpen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
