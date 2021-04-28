@@ -23,7 +23,7 @@ if (!logk) return message.channel.send(new Discord.MessageEmbed()
   .setColor("RED")
   .setFooter("Sharpen"));
 db.set(`salvomodlog_${message.guild.id}`, logk.id)
-message.channel.send(new Discord.RichEmbed()
+message.channel.send(new Discord.Message.Embed()
   .addField("İşlem Başarılı",`Mod-Log Kanalı ${logk} Olarak Ayarlandı`)
   .setColor("RED")
   .setFooter("Sharpen"));

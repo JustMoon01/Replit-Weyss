@@ -17,12 +17,15 @@ const mhelp = new Discord.MessageEmbed()
 ║**»** **!kick** : Sunucudan bir üyeyi atar.
 ║**»** **!sil** : Belirli bir kanaldaki mesajları siler.
 ║**»** **!antiraid** : Sunucuya izinsiz bot girmez.
-║**»** **!antiraidbotizni** : Sunucuya izinsiz bot girmez.
+║**»** **!antiraidbotizni** : Sunucuya gelecek bot için izin verirsin.
 ║**»** **!yavaş-mod** : Sohbete yazma sınır (süre) ekler.
 ║**»** **!sunucu-kur** : Bot sunucu kurar.
 ║**»** **!küfür-engel** : Küfür engel açıp kapatırsın.
 ║**»** **!reklam-engelle** : Reklam engel açıp kapatırsın.
+║**»** **!modlog** : Modlog ayarlarsın.
+║**»** **!emoji-ekle** : Sunucuya emoji eklersin.
 ║**»** **!nuke** : Kanala nuke atarsın.
+║**»** **!everyone-engel** : Everyone engel açıp kapatırsın.
 ║
 ║
 ╚════════════════════════════════════╝
@@ -36,7 +39,7 @@ message.channel.send(mhelp)
 exports.conf = {
     enabled: true, 
     guildOnly: false, 
-    aliases: ["mod"], 
+    aliases: ["y","yardım"], 
     permLevel: 0 
   };
  
