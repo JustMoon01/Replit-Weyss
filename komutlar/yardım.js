@@ -30,7 +30,7 @@ const mhelp = new Discord.MessageEmbed()
 ║
 ╚════════════════════════════════════╝
 `) 
-       .addField(`»  Bot Bağlantıları`, `  [Bot Davet Linki](https://discord.com/api/oauth2/authorize?client_id=728920362636542032&permissions=8&scope=bot) **|** [Destek Sunucusu](https://discord.gg/G5CZFT3) **|** [WebSitesi](http://ab.arrow-bot.tk/) :ate:`)//websiteniz yoksa  **|** [Web Sitesi]() yeri silebilirsiniz 
+       .addField(`»  Bot Bağlantıları`, `  [Bot Davet Linki](http://gweepcreative.com) **|** [Destek Sunucusu](https://discord.gg/G5CZFT3) **|** [WebSitesi](http://dc.gweepcreative.com/) :ate:`)//websiteniz yoksa  **|** [Web Sitesi]() yeri silebilirsiniz 
         .setFooter(`${message.author.username} Tarafından İstendi.`, message.author.avatarURL)
 message.channel.send(mhelp)
 .then; const sembed = new Discord.MessageEmbed()
