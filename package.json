@@ -1,10 +1,10 @@
 {
   "name": "hello-express",
   "version": "0.0.1",
-  "description": "sharpen Altyapi",
-  "main": "sharpen.js",
+  "description": "gweep Altyapi",
+  "main": "gweep.js",
   "scripts": {
-    "start": "node sharpen.js"
+    "start": "node gweep.js"
   },
   "dependencies": {
     "canvas": "^2.6.1",
