@@ -442,6 +442,7 @@ client.on("message", msg => {
       ".rf.gd",
       ".az",
       ".party",
+      ".tv",
       "discord.gg",
       "youtube.com"
     ];
