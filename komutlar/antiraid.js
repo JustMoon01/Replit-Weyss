@@ -1,6 +1,10 @@
 const Discord = require("discord.js");
 const db = require("quick.db");
+const ayarlar = require("../ayarlar.json");
 exports.run = (client, message, args) => {
+  
+ var prefix = ayarlar.prefix
+  
  if(!message.member.permissions.has("ADMINISTRATOR")) return message.reply("bu komutu kullanmak için `Yönetici` yetkisine sahip olmalısın.")
   if (args[0] == "aç") {
     if (db.has(`antiraidK_${message.guild.id}`) === true) {
@@ -21,7 +25,7 @@ exports.run = (client, message, args) => {
   }
   if (!args[0])
     return message.reply(
-      "Lütfen geçerli işlem girin. Örnek: **!anti-raid aç/kapat**"
+      `Lütfen geçerli işlem girin. Örnek: **${prefix}anti-raid aç/kapat**`
     );
 };
 exports.conf = {

@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const ayarlar = require("../ayarlar.json");
+  var prefix = ayarlar.prefix
 
 exports.run = (client, message, args) => {
   if (!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send(`Bu komutu kullanabilmek için "\`Yönetici\`" yetkisine sahip olmalısın.`);

@@ -1,10 +1,14 @@
 const Discord = require("discord.js");
 const db = require("quick.db");
+const ayarlar = require("../ayarlar.json");
 exports.run = (client, message, args) => {
+  
+  var prefix = ayarlar.prefix
+  
   if(!message.member.permissions.has("ADMINISTRATOR")) return message.reply("bu komutu kullanmak için `Yönetici` yetkisine sahip olmalısın.")
   if (db.has(`antiraidK_${message.guild.id}`) === false) {
     return message.channel.send(
-      "Anti-raid açılmamış. Açmak için **-anti-raid aç**"
+      `Anti-raid açılmamış. Açmak için **${prefix}anti-raid aç**`
     );
   }
   if (!args[1]) return message.reply("Lütfen bir bot id si girin");

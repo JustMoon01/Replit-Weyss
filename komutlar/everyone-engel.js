@@ -1,9 +1,12 @@
 const db = require('quick.db');
 const Discord = require('discord.js')
-
+const ayarlar = require("../ayarlar.json");
 exports.run = async (client, message, args) => {
+  
+  var prefix = ayarlar.prefix
+  
   if (!message.member.permissions.has("MANAGE_GUILD")) return message.channel.send(`❌ Bu Komutu Kullana Bilmek İçin \`Mesajları Yönet\` Yetkisine Sahip Olmalısın!`)
-  if (!args[0]) return message.channel.send('Hatalı kullanım! **Örnek Kullanım:** everyone-engel aç/kapat')
+  if (!args[0]) return message.channel.send(`Hatalı kullanım! **Örnek Kullanım:**${prefix}everyone-engel aç/kapat`)
   
   if (args[0] == 'aç') {
     db.set(`hereengel_${message.guild.id}`, 'acik')
