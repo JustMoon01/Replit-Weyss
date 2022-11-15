@@ -21,7 +21,7 @@ app.get("/", (request, response) => {//sharpen
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+  http.get(`http://neat-tangy-stomach.glitch.me`);
 }, 280000);
 
 //-------------------- 7/24 Uptime --------------------////sharpen 
@@ -113,7 +113,7 @@ client.elevation = message => {
   return permlvl;
 };
 
-client.login(ayarlar.token);//sharpen 
+client.login(process.env.TOKEN);//sharpen 
 
 
 
@@ -498,7 +498,7 @@ client.on("guildMemberAdd", async member => {
         .setColor("RANDOM")
         .setThumbnail(member.user.avatarURL())
         .setDescription(
-          `**${member.user.tag}** (${member.id}) adlı bota bir yetkili izin verdi eğer kaldırmak istiyorsanız **!bot-izni kaldır <botid>**.`
+          `**${member.user.tag}** (${member.id}) adlı bota bir yetkili izin verdi eğer kaldırmak istiyorsanız **${prefix}bot-izni kaldır <botid>**.`
         );
       synx2.send(synx);
     } else {
@@ -513,12 +513,14 @@ client.on("guildMemberAdd", async member => {
             member.id +
             ") " +
             "adlı bot sunucuya eklendi ve banladım eğer izin vermek istiyorsanız **" +
-            "!bot-izni ver <botid>**"
+            `${prefix}bot-izni ver <botid>**`
         );
       member.kick(); // Eğer sunucudan atmak istiyorsanız ban kısmını kick yapın
       synx2.send(izinverilmemişbot);
     }
   }
 });
+
+var prefix = ayarlar.prefix
 
 //ANTİ RAİD SON
