@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const data = require('quick.db');
+const ayarlar = require("../ayarlar.json");
 
 
 exports.run = async (client, message, args) => {
@@ -33,11 +34,10 @@ role.setColor('#3b0b0b');
 });
 message.guild.roles.create({ data: { name: 'Ceo' } , reason: 'ayn'}).then(role => {
 role.setPermissions(['MANAGE_GUILD', 'MANAGE_ROLES', 'MANAGE_NICKNAMES', 'MANAGE_MESSAGES', 'MUTE_MEMBERS', 'DEAFEN_MEMBERS']);
-role.setColor('#ff4000  ');
+role.setColor('#ff4000  ')
 });
 
 message.guild.roles.create({ data: { name: '・Üye' }, reason: 'ayn' }).then(s => s.setColor('#00ff40'))
-message.guild.roles.create({ data: { name: '・youtube.com/RexyCreative' }, reason: 'ayn' }).then(s => s.setColor('#f70c0c'))
 message.guild.roles.create({ data: { name: '・Botlar' }, reason: 'ayn' }).then(s => s.setColor('#e77e2e'))
 message.guild.roles.create({ data: { name: '・・・・・・・・' }, reason: 'ayn' }).then(s => s.setColor('#ffffff'))
 message.guild.roles.create({ data: { name: '🎮 | CSGO' }, reason: 'ayn' }).then(s => s.setColor('#e77e2e'))

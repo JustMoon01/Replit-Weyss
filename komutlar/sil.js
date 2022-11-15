@@ -11,6 +11,7 @@ exports.run = async (client, message, args) => {
         .setDescription(
           "**Bu Komutu Kullanabilmek İçin `Mesajları Yönet` Yetkisine Sahip Olmalısın !**"
         )
+      .setAuthor("Weyss Bot")
         .setColor("GREEN")
     );
 
