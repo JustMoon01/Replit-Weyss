@@ -10,7 +10,7 @@ const lembed = new Discord.MessageEmbed()
 const mhelp = new Discord.MessageEmbed()
 .setColor("RANDOM")
 .setAuthor(`${client.user.username} `, client.user.avatarURL)  
-.setTitle("Weyss Bot | Yardım Menüsü")
+.setTitle("Weyss Bot |Menüsü")
 .setThumbnail("https://cdn.discordapp.com/emojis/727894683061321759.gif?v=1")
     .setDescription(`
 
@@ -32,7 +32,7 @@ const mhelp = new Discord.MessageEmbed()
 ║
 ╚════════════════════════════════════╝
 `) 
-       .addField(`»  Bot Bağlantıları`, `  [Bot Davet Linki](YAKINDA) **|** [Destek Sunucusu](https://discord.gg/AbvaHaCQXx):ate:`)//websiteniz yoksa  **|** [Web Sitesi]() yeri silebilirsiniz 
+       .addField(`»  Bot Bağlantıları`, `  [Bot Davet Linki](https://discord.com/oauth2/authorize?client_id=1041677012676390932&scope=bot&permissions=8) **|** [Destek Sunucusu](https://discord.gg/AbvaHaCQXx):ate:`)//websiteniz yoksa  **|** [Web Sitesi]() yeri silebilirsiniz 
         .setFooter(`${message.author.username} Tarafından İstendi.`, message.author.avatarURL)
 message.channel.send(mhelp)
 .then; const sembed = new Discord.MessageEmbed()
@@ -41,12 +41,12 @@ message.channel.send(mhelp)
 exports.conf = {
     enabled: true, 
     guildOnly: false, 
-    aliases: ["y","yardım"], 
+    aliases: ["y-g","yardım-guard"], 
     permLevel: 0 
   };
  
   exports.help = {
-    name: 'yardım', 
+    name: 'yardim-guard', 
     description: 'yardım menüsü',
     usage: 'yardım'
   };
