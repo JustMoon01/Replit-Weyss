@@ -28,17 +28,17 @@ message.channel.send(weyss)
 
 }
 
-db.set(`erkekrol_${message.guild.id}`, rol.id)
+db.set(`kyetkilirol_${message.guild.id}`, rol.id)
 
 const weysss = new discord.MessageEmbed()
 
 .setAuthor(client.user.username, client.user.avatarURL)  
 
-.setTitle(`${client.user.username} - Erkek Rol Ayarlandı `)
+.setTitle(`${client.user.username} - Kayıt Yetkili Ayarlandı `)
 
 .setColor('BLACK')
 
-.setDescription(`Erkek Rolü Başarıyla ${rol} Olarak Ayarlandı ! `)
+.setDescription(`Kayıt Yetkili Rolü Başarıyla ${rol} Olarak Ayarlandı ! `)
 
 .setThumbnail(client.user.avatarURL)
 
