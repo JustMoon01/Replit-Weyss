@@ -115,6 +115,94 @@ client.elevation = message => {
 
 client.login(process.env.TOKEN);//sharpen 
 
+//-------------------- Kendi KOMUTLARIM --------------------//
+
+client.on("guildMemberAdd", member => {
+
+    require("moment-duration-format")
+
+      var üyesayısı = member.guild.members.cache.size.toString().replace(/ /g, "    ")
+
+      var üs = üyesayısı.match(/([0-9])/g)
+
+      üyesayısı = üyesayısı.replace(/([a-zA-Z])/g, "bilinmiyor").toLowerCase()
+
+      if(üs) {
+
+        üyesayısı = üyesayısı.replace(/([0-9])/g, d => {
+
+          return {
+
+            '0': `0`,
+
+            '1': `1`,
+
+            '2': `2`,
+
+            '3': `3`,
+
+            '4': `4`, // BOTUN OLDUĞU SUNUCUDA OLMA ŞARTI İLE HARAKETLİ EMOJİDE KOYABİLİRSİNİZ!
+
+            '5': `5`,
+
+            '6': `6`,
+
+            '7': `7`,
+
+            '8': `8`,
+
+            '9': `9`}[d];})}
+
+    const kanal = member.guild.channels.cache.find(r => r.id === (""));
+
+    let user = client.users.cache.get(member.id);//Youtube BoranGkdn
+
+    require("moment-duration-format");
+
+      const kurulus = new Date().getTime() - user.createdAt.getTime();  
+
+     const gecen = moment.duration(kurulus).format(` YY **[Yıl]** DD **[Gün]** HH **[Saat]** mm **[Dakika,]**`) 
+
+    var kontrol;
+
+  if (kurulus < 1296000000) kontrol = `Ve senin hesabın sunucumuza kayıt olmak için daha çok genç! :x: `
+
+  if (kurulus > 1296000000) kontrol = `Ve senin hesabın sunucumuza kayıt olmak için tüm şartları karşılıyor! :ballot_box_with_check: `
+
+    moment.locale("tr");
+
+ const kayıtsız = db.fetch()
+
+member.roles.add(ayarlar.arol)
+
+member.roles.add(ayarlar.arol)
+
+member.roles.add(ayarlar.arol)//Youtube BoranGkdn
+
+  
+
+    kanal.send(`
+
+Sunucumuza hoş geldin, <@`+ member + `>! Sayende sunucumuz **`+üyesayısı+`** kişi. 
+
+    
+
+Sunucumuza kayıt olmak için soldaki ses kanallarından birine girmelisin!
+
+Ayrıca hesabın 15 günden fazla bir süredir Discord'da bulunmalı.
+
+`+kontrol+``)});
+
+
+
+
+
+
+
+
+
+//-------------------- Kendi KOMUTLARIM --------------------//
+
 
 
 //-------------------- Mod Log Sistemi --------------------//

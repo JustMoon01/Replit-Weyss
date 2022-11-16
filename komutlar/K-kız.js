@@ -36,9 +36,13 @@ let yaş = args[2]
 
 if (!yaş) return message.channel.send(`Yaşını Belirtmelisin ! `)
 
- 
+ if(!tag){
+
+let tag = "-"
+
+}
   
-member.setNickname(`${isim} | ${yaş}`)
+member.setNickname(`${tag} ${isim} | ${yaş}`)
 
 member.roles.remove(alınacakrol)
 
