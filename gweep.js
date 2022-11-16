@@ -153,7 +153,7 @@ client.on("guildMemberAdd", member => {
 
             '9': `9`}[d];})}
 
-    const kanal = member.guild.channels.cache.find(r => r.id === (""));
+    const kanal = member.guild.channels.cache.find(db.fetch(`kayitkanal_${member.guild.id}`));
 
     let user = client.users.cache.get(member.id);//Youtube BoranGkdn
 
@@ -170,18 +170,21 @@ client.on("guildMemberAdd", member => {
   if (kurulus > 1296000000) kontrol = `Ve senin hesabın sunucumuza kayıt olmak için tüm şartları karşılıyor! :ballot_box_with_check: `
 
     moment.locale("tr");
+  
+  var kayıtsız = db.fetch(`arol_${member.guild.id}`);
 
- const kayıtsız = db.fetch()
+  var rol = member.guild.roles.cache.get(kayıtsız);
 
-member.roles.add(ayarlar.arol)
+  if (!rol) return;
 
-member.roles.add(ayarlar.arol)
-
-member.roles.add(ayarlar.arol)//Youtube BoranGkdn
+member.roles.add(rol.id)
+//Youtube BoranGkdn
 
   
 
-    kanal.send(`
+    kanal.send(new Discord.MessageEmbed()
+              
+               .setDescription(`
 
 Sunucumuza hoş geldin, <@`+ member + `>! Sayende sunucumuz **`+üyesayısı+`** kişi. 
 
@@ -191,7 +194,9 @@ Sunucumuza kayıt olmak için soldaki ses kanallarından birine girmelisin!
 
 Ayrıca hesabın 15 günden fazla bir süredir Discord'da bulunmalı.
 
-`+kontrol+``)});
+`+kontrol+``)
+              .setColor(`BLACK`)
+              )});
 
 
 
