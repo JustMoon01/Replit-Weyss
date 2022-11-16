@@ -36,7 +36,7 @@ kaydı var.`)
 
       `»  Bot Bağlantıları`,
 
-      `  [Bot Davet Linki](https://discord.com/oauth2/authorize?client_id=1041677012676390932&scope=bot&permissions=8) **|** [Destek Sunucusu](https://discord.gg/AbvaHaCQXx):ate:`
+      `  [Bot Davet Linki](https://discord.com/oauth2/authorize?client_id=1041677012676390932&scope=bot&permissions=8) **|** [Destek Sunucusu](https://discord.gg/AbvaHaCQXx) :ate:`
 
     ) //websiteniz yoksa  **|** [Web Sitesi]() yeri silebilirsiniz
 
