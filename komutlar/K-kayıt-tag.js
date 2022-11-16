@@ -10,7 +10,7 @@ if(!text) return message.channel.send(new Discord.MessageEmbed().setColor('BLACK
 
 db.set(`kayıttag_${message.guild.id}`, text)
 
-return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription("Kayıt Tagı Başarıyla ${text} Olarak Ayarlandı!"))
+return message.channel.send(new Discord.MessageEmbed().setColor('BLACK').setDescription(`Kayıt Tagı Başarıyla ${text} Olarak Ayarlandı!`))
 
 };
 

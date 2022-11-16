@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const jimp = require("jimp");
 const db = require("quick.db");
-const ayarlar = require("./ayarlar.json");//sharpen 
+const ayarlar = require("./ayarlar.json"); //sharpen
 const chalk = require("chalk");
 const fs = require("fs");
 const moment = require("moment");
@@ -15,7 +15,8 @@ require("./util/eventLoader")(client);
 const express = require("express");
 const app = express();
 const http = require("http");
-app.get("/", (request, response) => {//sharpen 
+app.get("/", (request, response) => {
+  //sharpen
   console.log(`7/24 Hizmet Vermekteyim!`);
   response.sendStatus(200);
 });
@@ -24,7 +25,7 @@ setInterval(() => {
   http.get(`http://neat-tangy-stomach.glitch.me`);
 }, 280000);
 
-//-------------------- 7/24 Uptime --------------------////sharpen 
+//-------------------- 7/24 Uptime --------------------////sharpen
 //-------------------- 7/24 Uptime --------------------//
 //-------------------- 7/24 Uptime --------------------//
 
@@ -35,7 +36,7 @@ client.on("ready", async () => {
   }, 600);
 });
 
-const log = message => {
+const log = (message) => {
   console.log(` ${message}`);
 };
 require("./util/eventLoader.js")(client);
@@ -45,18 +46,19 @@ client.aliases = new Discord.Collection();
 fs.readdir("./komutlar/", (err, files) => {
   if (err) console.error(err);
   log(`${files.length} komut yüklenecek.`);
-  files.forEach(f => {
+  files.forEach((f) => {
     let props = require(`./komutlar/${f}`);
     log(`Yüklenen komut: ${props.help.name}.`);
     client.commands.set(props.help.name, props);
-    props.conf.aliases.forEach(alias => {
+    props.conf.aliases.forEach((alias) => {
       client.aliases.set(alias, props.help.name);
     });
   });
 });
-client.reload = command => {
+client.reload = (command) => {
   return new Promise((resolve, reject) => {
-    try {//sharpen 
+    try {
+      //sharpen
       delete require.cache[require.resolve(`./komutlar/${command}`)];
       let cmd = require(`./komutlar/${command}`);
       client.commands.delete(command);
@@ -64,7 +66,7 @@ client.reload = command => {
         if (cmd === command) client.aliases.delete(alias);
       });
       client.commands.set(command, cmd);
-      cmd.conf.aliases.forEach(alias => {
+      cmd.conf.aliases.forEach((alias) => {
         client.aliases.set(alias, cmd.help.name);
       });
       resolve();
@@ -73,21 +75,21 @@ client.reload = command => {
     }
   });
 };
-client.load = command => {
+client.load = (command) => {
   return new Promise((resolve, reject) => {
     try {
       let cmd = require(`./komutlar/${command}`);
       client.commands.set(command, cmd);
-      cmd.conf.aliases.forEach(alias => {
+      cmd.conf.aliases.forEach((alias) => {
         client.aliases.set(alias, cmd.help.name);
       });
       resolve();
     } catch (e) {
-      reject(e);//sharpen 
+      reject(e); //sharpen
     }
   });
 };
-client.unload = command => {
+client.unload = (command) => {
   return new Promise((resolve, reject) => {
     try {
       delete require.cache[require.resolve(`./komutlar/${command}`)];
@@ -96,97 +98,109 @@ client.unload = command => {
       client.aliases.forEach((cmd, alias) => {
         if (cmd === command) client.aliases.delete(alias);
       });
-      resolve();//sharpen 
+      resolve(); //sharpen
     } catch (e) {
       reject(e);
     }
   });
 };
-client.elevation = message => {
+client.elevation = (message) => {
   if (!message.guild) {
     return;
   }
-  let permlvl = 0;//sharpen creative
+  let permlvl = 0; //sharpen creative
   if (message.member.hasPermission("BAN_MEMBERS")) permlvl = 2;
   if (message.member.hasPermission("ADMINISTRATOR")) permlvl = 3;
   if (message.author.id === ayarlar.sahip) permlvl = 4;
   return permlvl;
 };
 
-client.login(process.env.TOKEN);//sharpen 
+client.login(process.env.TOKEN); //sharpen
 
 //-------------------- Kendi KOMUTLARIM --------------------//
 
-client.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", (member) => {
+  require("moment-duration-format");
 
-    require("moment-duration-format")
+  var üyesayısı = member.guild.members.cache.size
+    .toString()
+    .replace(/ /g, "    ");
 
-      var üyesayısı = member.guild.members.cache.size.toString().replace(/ /g, "    ")
+  var üs = üyesayısı.match(/([0-9])/g);
 
-      var üs = üyesayısı.match(/([0-9])/g)
+  üyesayısı = üyesayısı.replace(/([a-zA-Z])/g, "bilinmiyor").toLowerCase();
 
-      üyesayısı = üyesayısı.replace(/([a-zA-Z])/g, "bilinmiyor").toLowerCase()
+  if (üs) {
+    üyesayısı = üyesayısı.replace(/([0-9])/g, (d) => {
+      return {
+        0: `0`,
 
-      if(üs) {
+        1: `1`,
 
-        üyesayısı = üyesayısı.replace(/([0-9])/g, d => {
+        2: `2`,
 
-          return {
+        3: `3`,
 
-            '0': `0`,
+        4: `4`, // BOTUN OLDUĞU SUNUCUDA OLMA ŞARTI İLE HARAKETLİ EMOJİDE KOYABİLİRSİNİZ!
 
-            '1': `1`,
+        5: `5`,
 
-            '2': `2`,
+        6: `6`,
 
-            '3': `3`,
+        7: `7`,
 
-            '4': `4`, // BOTUN OLDUĞU SUNUCUDA OLMA ŞARTI İLE HARAKETLİ EMOJİDE KOYABİLİRSİNİZ!
+        8: `8`,
 
-            '5': `5`,
+        9: `9`,
+      }[d];
+    });
+  }
 
-            '6': `6`,
+  let user = client.users.cache.get(member.id); //Youtube BoranGkdn
 
-            '7': `7`,
+  require("moment-duration-format");
 
-            '8': `8`,
+  const kurulus = new Date().getTime() - user.createdAt.getTime();
 
-            '9': `9`}[d];})}
+  const gecen = moment
+    .duration(kurulus)
+    .format(` YY **[Yıl]** DD **[Gün]** HH **[Saat]** mm **[Dakika,]**`);
 
-    const kanal = member.guild.channels.cache.find(db.fetch(`kayitkanal_${member.guild.id}`));
+  var kontrol;
 
-    let user = client.users.cache.get(member.id);//Youtube BoranGkdn
+  if (kurulus < 1296000000)
+    kontrol = `Ve senin hesabın sunucumuza kayıt olmak için daha çok genç! :x: `;
 
-    require("moment-duration-format");
+  if (kurulus > 1296000000)
+    kontrol = `Ve senin hesabın sunucumuza kayıt olmak için tüm şartları karşılıyor! :ballot_box_with_check: `;
 
-      const kurulus = new Date().getTime() - user.createdAt.getTime();  
+  moment.locale("tr");
 
-     const gecen = moment.duration(kurulus).format(` YY **[Yıl]** DD **[Gün]** HH **[Saat]** mm **[Dakika,]**`) 
-
-    var kontrol;
-
-  if (kurulus < 1296000000) kontrol = `Ve senin hesabın sunucumuza kayıt olmak için daha çok genç! :x: `
-
-  if (kurulus > 1296000000) kontrol = `Ve senin hesabın sunucumuza kayıt olmak için tüm şartları karşılıyor! :ballot_box_with_check: `
-
-    moment.locale("tr");
-  
   var kayıtsız = db.fetch(`arol_${member.guild.id}`);
 
   var rol = member.guild.roles.cache.get(kayıtsız);
 
   if (!rol) return;
 
-member.roles.add(rol.id)
-//Youtube BoranGkdn
+  member.roles.add(rol.id);
+  //Youtube BoranGkdn
 
-  
+  var ales = db.fetch(`kayitkanal_${member.guild.id}`);
 
-    kanal.send(new Discord.MessageEmbed()
-              
-               .setDescription(`
+  var kanal = member.guild.channels.cache.get(ales);
 
-Sunucumuza hoş geldin, <@`+ member + `>! Sayende sunucumuz **`+üyesayısı+`** kişi. 
+  if (!kanal) return;
+
+  const kayitotorol = new Discord.MessageEmbed()
+
+    .setTitle(`**__Weyss Kayıt Sistemi__**`)
+
+    .setDescription(
+      `Sunucumuza hoş geldin, <@` +
+        member +
+        `>! Sayende sunucumuz **` +
+        üyesayısı +
+        `** kişi. 
 
     
 
@@ -194,225 +208,316 @@ Sunucumuza kayıt olmak için soldaki ses kanallarından birine girmelisin!
 
 Ayrıca hesabın 15 günden fazla bir süredir Discord'da bulunmalı.
 
-`+kontrol+``)
-              .setColor(`BLACK`)
-              )});
+` +
+        kontrol +
+        ``
+    )
 
+    .setFooter(`Sunucuya Yeni Biri Katıldı`);
 
-
-
-
-
-
-
+  kanal.send(kayitotorol);
+});
 
 //-------------------- Kendi KOMUTLARIM --------------------//
 
-
-
 //-------------------- Mod Log Sistemi --------------------//
 
-client.on('channelCreate', async channel => {
-  const c = channel.guild.channels.cache.get(db.fetch(`salvomodlog_${channel.guild.id}`));
+client.on("channelCreate", async (channel) => {
+  const c = channel.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${channel.guild.id}`)
+  );
   if (!c) return;
-    var embed = new Discord.MessageEmbed()
-                    .addField(`Kanal oluşturuldu`, ` İsmi: \`${channel.name}\`\n Türü: **${channel.type}**\nID: ${channel.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${channel.client.user.username}#${channel.client.user.discriminator}`, channel.client.user.avatarURL)
-    c.send(embed)
-});
-
-client.on('channelDelete', async channel => {
-  const c = channel.guild.channels.cache.get(db.fetch(`salvomodlog_${channel.guild.id}`));
-  if (!c) return;
-    let embed = new Discord.MessageEmbed()
-                    .addField(`Kanal silindi`, ` İsmi: \`${channel.name}\`\n Türü: **${channel.type}**\nID: ${channel.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${channel.client.user.username}#${channel.client.user.discriminator}`, channel.client.user.avatarURL)
-
-    c.send(embed)
-});
-
-   client.on('channelNameUpdate', async channel => {
-  const c = channel.guild.channels.cache.get(db.fetch(`salvomodlog_${channel.guild.id}`));
-  if (!c) return;
-    var embed = new Discord.MessageEmbed()
-                    .addField(`Kanal İsmi değiştirildi`, ` Yeni İsmi: \`${channel.name}\`\nID: ${channel.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${channel.client.user.username}#${channel.client.user.discriminator}`, channel.client.user.avatarURL)
-    c.send(embed)
-});
-
-client.on('emojiCreate', emoji => {
-  const c = emoji.guild.channels.cache.get(db.fetch(`salvomodlog_${emoji.guild.id}`));
-  if (!c) return;
-
-    let embed = new Discord.MessageEmbed()
-                    .addField(`Emoji oluşturuldu`, ` İsmi: \`${emoji.name}\`\n GIF?: **${emoji.animated}**\nID: ${emoji.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${emoji.client.user.username}#${emoji.client.user.discriminator}`, emoji.client.user.avatarURL)
-
-    c.send(embed)
-    });
-client.on('emojiDelete', emoji => {
-  const c = emoji.guild.channels.cache.get(db.fetch(`salvomodlog_${emoji.guild.id}`));
-  if (!c) return;
-
-    let embed = new Discord.MessageEmbed()
-                    .addField(`Emoji silindi`, ` İsmi: \`${emoji.name}\`\n GIF? : **${emoji.animated}**\nID: ${emoji.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${emoji.client.user.username}#${emoji.client.user.discriminator}`, emoji.client.user.avatarURL)
-
-    c.send(embed)
-    });
-client.on('emojiUpdate', (oldEmoji, newEmoji) => {
-  const c = newEmoji.guild.channels.cache.get(db.fetch(`salvomodlog_${newEmoji.guild.id}`));
-  if (!c) return;
-
-    let embed = new Discord.MessageEmbed()
-                    .addField(`Emoji güncellendi`, ` Eski ismi: \`${oldEmoji.name}\`\n Yeni ismi: \`${newEmoji.name}\`\nID: ${oldEmoji.id}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${newEmoji.client.user.username}#${newEmoji.client.user.discriminator}`, newEmoji.client.user.avatarURL)
-
-    c.send(embed)
-    });
-
-client.on('guildBanAdd', async (guild, user) => {    
-    const channel = guild.channels.cache.get(db.fetch(`salvomodlog_${guild.id}`));
-  if (!channel) return;
-  
-  const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
-
-    let embed = new Discord.MessageEmbed()
-                    .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
-                    .addField(`Kullanıcı banlandı`, ` İsmi: \`${user.username}\`\n ID: **${user.id}**\n Sebep: **${entry.reason || 'Belirtmedi'}**\n Banlayan: **${entry.executor.username}#${entry.executor.discriminator}**`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${entry.executor.username}#${entry.executor.discriminator} tarafından`, entry.executor.avatarURL)
-
-    channel.send(embed)
-});
-
-client.on('guildBanRemove', async (guild, user) => {    
-    const channel = guild.channels.cache.get(db.fetch(`salvomodlog_${guild.id}`));
-  if (!channel) return;
-  
-  const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
-
-    let embed = new Discord.MessageEmbed()
-                    .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
-                    .addField(`Kullanıcının banı açıldı`, ` İsmi: \`${user.username}\`\n ID: **${user.id}**\n Banı Kaldıran: **${entry.executor.username}#${entry.executor.discriminator}**`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${entry.executor.username}#${entry.executor.discriminator} tarafından`, entry.executor.avatarURL)
-
-    channel.send(embed)
-});
-client.on('messageDelete', async message => {    
-  if(message.author.bot) return
-
-    const channel = message.guild.channels.cache.get(db.fetch(`salvomodlog_${message.guild.id}`));
-  if (!channel) return;
-  
-    let embed = new Discord.MessageEmbed()
-                    .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.avatarURL)
-                    .setTitle("Mesaj silindi")                
-                    .addField(`Silinen mesaj : ${message.content}`,`Kanal: ${message.channel.name}`)
-                   .addField(`Kanal:`,`${message.channel.name}`)
-                    .setTimestamp()
-                    .setColor("Black")
-                    .setFooter(`${message.client.user.username}#${message.client.user.discriminator}`, message.client.user.avatarURL)
-
-    channel.send(embed)
-});
-
-client.on('messageUpdate', async(oldMessage, newMessage) => {
-    if(oldMessage.author.bot) return;
-    if(oldMessage.content == newMessage.content) return;
-
-    const channel = oldMessage.guild.channels.cache.get(db.fetch(`salvomodlog_${oldMessage.guild.id}`));
-    if(!channel) return;
-
-    let embed = new Discord.MessageEmbed()
-    .setTitle("Mesaj güncellendi!")
-    .addField("Eski mesaj : ",`${oldMessage.content}`)
-    .addField("Yeni mesaj : ",`${newMessage.content}`)
-    .addField("Kanal : ",`${oldMessage.channel.name}`)
+  var embed = new Discord.MessageEmbed()
+    .addField(
+      `Kanal oluşturuldu`,
+      ` İsmi: \`${channel.name}\`\n Türü: **${channel.type}**\nID: ${channel.id}`
+    )
     .setTimestamp()
     .setColor("Black")
-    .setFooter(`${oldMessage.client.user.username}#${oldMessage.client.user.discriminator}`,`${oldMessage.client.user.avatarURL}`)
-
-    channel.send(embed)
+    .setFooter(
+      `${channel.client.user.username}#${channel.client.user.discriminator}`,
+      channel.client.user.avatarURL
+    );
+  c.send(embed);
 });
 
-client.on('roleCreate', async (role) => {    
+client.on("channelDelete", async (channel) => {
+  const c = channel.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${channel.guild.id}`)
+  );
+  if (!c) return;
+  let embed = new Discord.MessageEmbed()
+    .addField(
+      `Kanal silindi`,
+      ` İsmi: \`${channel.name}\`\n Türü: **${channel.type}**\nID: ${channel.id}`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${channel.client.user.username}#${channel.client.user.discriminator}`,
+      channel.client.user.avatarURL
+    );
 
-    const channel = role.guild.channels.cache.get(db.fetch(`salvomodlog_${role.guild.id}`));
-  if (!channel) return;
-  
-    let embed = new Discord.MessageEmbed()
-.addField(`Rol oluşturuldu`, ` ismi: \`${role.name}\`\n ID: ${role.id}`)                    
-.setTimestamp()
-.setColor("Black")
-.addField("Rol renk kodu : ",`${role.hexColor}`)
-.setFooter(`${role.client.user.username}#${role.client.user.discriminator}`, role.client.user.avatarURL)
-
-    channel.send(embed)
+  c.send(embed);
 });
 
-client.on('roleDelete', async (role) => {    
+client.on("channelNameUpdate", async (channel) => {
+  const c = channel.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${channel.guild.id}`)
+  );
+  if (!c) return;
+  var embed = new Discord.MessageEmbed()
+    .addField(
+      `Kanal İsmi değiştirildi`,
+      ` Yeni İsmi: \`${channel.name}\`\nID: ${channel.id}`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${channel.client.user.username}#${channel.client.user.discriminator}`,
+      channel.client.user.avatarURL
+    );
+  c.send(embed);
+});
 
-    const channel = role.guild.channels.cache.get(db.fetch(`salvomodlog_${role.guild.id}`));
+client.on("emojiCreate", (emoji) => {
+  const c = emoji.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${emoji.guild.id}`)
+  );
+  if (!c) return;
+
+  let embed = new Discord.MessageEmbed()
+    .addField(
+      `Emoji oluşturuldu`,
+      ` İsmi: \`${emoji.name}\`\n GIF?: **${emoji.animated}**\nID: ${emoji.id}`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${emoji.client.user.username}#${emoji.client.user.discriminator}`,
+      emoji.client.user.avatarURL
+    );
+
+  c.send(embed);
+});
+client.on("emojiDelete", (emoji) => {
+  const c = emoji.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${emoji.guild.id}`)
+  );
+  if (!c) return;
+
+  let embed = new Discord.MessageEmbed()
+    .addField(
+      `Emoji silindi`,
+      ` İsmi: \`${emoji.name}\`\n GIF? : **${emoji.animated}**\nID: ${emoji.id}`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${emoji.client.user.username}#${emoji.client.user.discriminator}`,
+      emoji.client.user.avatarURL
+    );
+
+  c.send(embed);
+});
+client.on("emojiUpdate", (oldEmoji, newEmoji) => {
+  const c = newEmoji.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${newEmoji.guild.id}`)
+  );
+  if (!c) return;
+
+  let embed = new Discord.MessageEmbed()
+    .addField(
+      `Emoji güncellendi`,
+      ` Eski ismi: \`${oldEmoji.name}\`\n Yeni ismi: \`${newEmoji.name}\`\nID: ${oldEmoji.id}`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${newEmoji.client.user.username}#${newEmoji.client.user.discriminator}`,
+      newEmoji.client.user.avatarURL
+    );
+
+  c.send(embed);
+});
+
+client.on("guildBanAdd", async (guild, user) => {
+  const channel = guild.channels.cache.get(db.fetch(`salvomodlog_${guild.id}`));
   if (!channel) return;
-  
-    let embed = new Discord.MessageEmbed()
-.addField(`Rol silindi`, ` ismi: \`${role.name}\`\n ID: ${role.id}`)                    
-.setTimestamp()
-.setColor("Black")
-    .addField("Rol renk kodu : ",`${role.hexColor}`)
-.setFooter(`${role.client.user.username}#${role.client.user.discriminator}`, role.client.user.avatarURL)
 
-    channel.send(embed)
-})
-client.on('voiceStateUpdate', (oldMember, newMember) => {
+  const entry = await guild
+    .fetchAuditLogs({ type: "MEMBER_BAN_ADD" })
+    .then((audit) => audit.entries.first());
 
+  let embed = new Discord.MessageEmbed()
+    .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
+    .addField(
+      `Kullanıcı banlandı`,
+      ` İsmi: \`${user.username}\`\n ID: **${user.id}**\n Sebep: **${
+        entry.reason || "Belirtmedi"
+      }**\n Banlayan: **${entry.executor.username}#${
+        entry.executor.discriminator
+      }**`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${entry.executor.username}#${entry.executor.discriminator} tarafından`,
+      entry.executor.avatarURL
+    );
+
+  channel.send(embed);
+});
+
+client.on("guildBanRemove", async (guild, user) => {
+  const channel = guild.channels.cache.get(db.fetch(`salvomodlog_${guild.id}`));
+  if (!channel) return;
+
+  const entry = await guild
+    .fetchAuditLogs({ type: "MEMBER_BAN_ADD" })
+    .then((audit) => audit.entries.first());
+
+  let embed = new Discord.MessageEmbed()
+    .setAuthor(`${user.username}#${user.discriminator}`, user.avatarURL)
+    .addField(
+      `Kullanıcının banı açıldı`,
+      ` İsmi: \`${user.username}\`\n ID: **${user.id}**\n Banı Kaldıran: **${entry.executor.username}#${entry.executor.discriminator}**`
+    )
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${entry.executor.username}#${entry.executor.discriminator} tarafından`,
+      entry.executor.avatarURL
+    );
+
+  channel.send(embed);
+});
+client.on("messageDelete", async (message) => {
+  if (message.author.bot) return;
+
+  const channel = message.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${message.guild.id}`)
+  );
+  if (!channel) return;
+
+  let embed = new Discord.MessageEmbed()
+    .setAuthor(
+      `${message.author.username}#${message.author.discriminator}`,
+      message.author.avatarURL
+    )
+    .setTitle("Mesaj silindi")
+    .addField(
+      `Silinen mesaj : ${message.content}`,
+      `Kanal: ${message.channel.name}`
+    )
+    .addField(`Kanal:`, `${message.channel.name}`)
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${message.client.user.username}#${message.client.user.discriminator}`,
+      message.client.user.avatarURL
+    );
+
+  channel.send(embed);
+});
+
+client.on("messageUpdate", async (oldMessage, newMessage) => {
+  if (oldMessage.author.bot) return;
+  if (oldMessage.content == newMessage.content) return;
+
+  const channel = oldMessage.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${oldMessage.guild.id}`)
+  );
+  if (!channel) return;
+
+  let embed = new Discord.MessageEmbed()
+    .setTitle("Mesaj güncellendi!")
+    .addField("Eski mesaj : ", `${oldMessage.content}`)
+    .addField("Yeni mesaj : ", `${newMessage.content}`)
+    .addField("Kanal : ", `${oldMessage.channel.name}`)
+    .setTimestamp()
+    .setColor("Black")
+    .setFooter(
+      `${oldMessage.client.user.username}#${oldMessage.client.user.discriminator}`,
+      `${oldMessage.client.user.avatarURL}`
+    );
+
+  channel.send(embed);
+});
+
+client.on("roleCreate", async (role) => {
+  const channel = role.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${role.guild.id}`)
+  );
+  if (!channel) return;
+
+  let embed = new Discord.MessageEmbed()
+    .addField(`Rol oluşturuldu`, ` ismi: \`${role.name}\`\n ID: ${role.id}`)
+    .setTimestamp()
+    .setColor("Black")
+    .addField("Rol renk kodu : ", `${role.hexColor}`)
+    .setFooter(
+      `${role.client.user.username}#${role.client.user.discriminator}`,
+      role.client.user.avatarURL
+    );
+
+  channel.send(embed);
+});
+
+client.on("roleDelete", async (role) => {
+  const channel = role.guild.channels.cache.get(
+    db.fetch(`salvomodlog_${role.guild.id}`)
+  );
+  if (!channel) return;
+
+  let embed = new Discord.MessageEmbed()
+    .addField(`Rol silindi`, ` ismi: \`${role.name}\`\n ID: ${role.id}`)
+    .setTimestamp()
+    .setColor("Black")
+    .addField("Rol renk kodu : ", `${role.hexColor}`)
+    .setFooter(
+      `${role.client.user.username}#${role.client.user.discriminator}`,
+      role.client.user.avatarURL
+    );
+
+  channel.send(embed);
+});
+client.on("voiceStateUpdate", (oldMember, newMember) => {
   if (db.has(`salvomodlog_${oldMember.guild.id}`) === false) return;
-  
-  var kanal = oldMember.guild.channels.cache.get(db.fetch(`salvomodlog_${oldMember.guild.id}`).replace("<#", "").replace(">", ""))
+
+  var kanal = oldMember.guild.channels.cache.get(
+    db
+      .fetch(`salvomodlog_${oldMember.guild.id}`)
+      .replace("<#", "")
+      .replace(">", "")
+  );
   if (!kanal) return;
-  
-  let newUserChannel = newMember.voiceChannel
-  let oldUserChannel = oldMember.voiceChannel
 
-  if(oldUserChannel === undefined && newUserChannel !== undefined) {
+  let newUserChannel = newMember.voiceChannel;
+  let oldUserChannel = oldMember.voiceChannel;
 
+  if (oldUserChannel === undefined && newUserChannel !== undefined) {
     const embed = new Discord.MessageEmbed()
-    .setColor("Black")
-    .setDescription(`${newMember.user.tag} adlı kullanıcı \`${newUserChannel.name}\` isimli sesli kanala giriş yaptı!`)
+      .setColor("Black")
+      .setDescription(
+        `${newMember.user.tag} adlı kullanıcı \`${newUserChannel.name}\` isimli sesli kanala giriş yaptı!`
+      );
     kanal.send(embed);
-    
-  } else if(newUserChannel === undefined){
-
+  } else if (newUserChannel === undefined) {
     const embed = new Discord.MessageEmbed()
-    .setColor("Black")
-    .setDescription(`${newMember.user.tag} adlı kullanıcı sesli kanaldan çıkış yaptı!`)
+      .setColor("Black")
+      .setDescription(
+        `${newMember.user.tag} adlı kullanıcı sesli kanaldan çıkış yaptı!`
+      );
     kanal.send(embed);
-    
   }
-});  
+});
 
 //-------------------- Mod Log Sistemi Son --------------------//
 
-
 //-------------------- Küfür Engel Sistemi --------------------//
 
-client.on("message", async msg => {
+client.on("message", async (msg) => {
   const i = await db.fetch(`${msg.guild.id}.kufur`);
   if (i) {
     const kufur = [
@@ -441,16 +546,16 @@ client.on("message", async msg => {
       "mq",
       "aq",
       "ak",
-      "amq"
+      "amq",
     ];
-    if (kufur.some(word => msg.content.includes(word))) {
+    if (kufur.some((word) => msg.content.includes(word))) {
       try {
         if (!msg.member.permissions.has("BAN_MEMBERS")) {
           msg.delete();
 
           return msg
             .reply("Heey! Küfür Yasak.")
-            .then(wiskyx => wiskyx.delete({ timeout: 5000 }));
+            .then((wiskyx) => wiskyx.delete({ timeout: 5000 }));
         }
       } catch (err) {
         console.log(err);
@@ -460,7 +565,7 @@ client.on("message", async msg => {
   if (!i) return;
 });
 
-client.on("messageUpdate", async msg => {
+client.on("messageUpdate", async (msg) => {
   const i = db.fetch(`${msg.guild.id}.kufur`);
   if (i) {
     const kufur = [
@@ -489,16 +594,16 @@ client.on("messageUpdate", async msg => {
       "mq",
       "aq",
       "ak",
-      "amq"
+      "amq",
     ];
-    if (kufur.some(word => msg.content.includes(word))) {
+    if (kufur.some((word) => msg.content.includes(word))) {
       try {
         if (!msg.member.permissions.has("BAN_MEMBERS")) {
           msg.delete();
 
           return msg
             .reply("Yakaladım Seni! Küfür Yasak.")
-            .then(wiskyx => wiskyx.delete({ timeout: 5000 }));
+            .then((wiskyx) => wiskyx.delete({ timeout: 5000 }));
         }
       } catch (err) {
         console.log(err);
@@ -512,7 +617,7 @@ client.on("messageUpdate", async msg => {
 
 //REKLAM ENGEL
 
-client.on("message", msg => {
+client.on("message", (msg) => {
   const veri = db.fetch(`${msg.guild.id}.reklam`);
   if (veri) {
     const reklam = [
@@ -537,15 +642,15 @@ client.on("message", msg => {
       ".party",
       ".tv",
       "discord.gg",
-      "youtube.com"
+      "youtube.com",
     ];
-    if (reklam.some(word => msg.content.includes(word))) {
+    if (reklam.some((word) => msg.content.includes(word))) {
       try {
         if (!msg.member.permissions.has("BAN_MEMBERS")) {
           msg.delete();
           return msg
             .reply("Yakaladım Seni! Reklam Yasak.")
-            .then(wiskyx => wiskyx.delete({ timeout: 5000 }));
+            .then((wiskyx) => wiskyx.delete({ timeout: 5000 }));
         }
       } catch (err) {
         console.log(err);
@@ -559,16 +664,16 @@ client.on("message", msg => {
 
 //EVERYONE-HERE ENGEL
 
-client.on("message", async msg => {
+client.on("message", async (msg) => {
   let hereengelle = await db.fetch(`hereengel_${msg.guild.id}`);
   if (hereengelle == "acik") {
     const here = ["@here", "@everyone"];
-    if (here.some(word => msg.content.toLowerCase().includes(word))) {
+    if (here.some((word) => msg.content.toLowerCase().includes(word))) {
       if (!msg.member.permissions.has("ADMINISTRATOR")) {
         msg.delete();
         return msg
           .reply("Yakaladım Seni! Everyone ve Here Etiketlemek Yasak.")
-          .then(wiskyx => wiskyx.delete({ timeout: 5000 }));
+          .then((wiskyx) => wiskyx.delete({ timeout: 5000 }));
       }
     }
   } else if (hereengelle == "kapali") {
@@ -577,10 +682,9 @@ client.on("message", async msg => {
 
 //EVERYONE-HERE ENGEL SON
 
-
 //ANTİ RAİD
 
-client.on("guildMemberAdd", async member => {
+client.on("guildMemberAdd", async (member) => {
   let kanal =
     (await db.fetch(`antiraidK_${member.guild.id}`)) == "anti-raid-aç";
   if (!kanal) return;
@@ -614,6 +718,6 @@ client.on("guildMemberAdd", async member => {
   }
 });
 
-var prefix = ayarlar.prefix
+var prefix = ayarlar.prefix;
 
 //ANTİ RAİD SON
