@@ -10,7 +10,7 @@ const lembed = new Discord.MessageEmbed()
 const mhelp = new Discord.MessageEmbed()
 .setColor("RANDOM")
 .setAuthor(`${client.user.username} `, client.user.avatarURL)  
-.setTitle("Weyss Bot |Menüsü")
+.setTitle("Weyss Bot | Guard Menüsü")
 .setThumbnail("https://cdn.discordapp.com/emojis/727894683061321759.gif?v=1")
     .setDescription(`
 
