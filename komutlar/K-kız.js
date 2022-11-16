@@ -8,11 +8,11 @@ let kanal = db.fetch(`kayitkanal_${message.guild.id}`)
 
 let alınacakrol = db.fetch(`arol_${message.guild.id}`)
 
-let tag = db.fetch(`kayittag_${message.guild.id}`)
+var tag = db.fetch(`kayıttag_${message.guild.id}`)
 
 let kızrol = db.fetch(`kızrol_${message.guild.id}`)
 
-let kayıtçı = db.fetch(`kyetkilkrol_${message.guild.id}`)
+let kayıtçı = db.fetch(`kyetkilirol_${message.guild.id}`)
 
 let kayıtsayı = db.fetch(`kayıtsayı_${message.author.id}`)
 
@@ -38,7 +38,7 @@ if (!yaş) return message.channel.send(`Yaşını Belirtmelisin ! `)
 
  if(!tag){
 
-let tag = "-"
+var tag = "-"
 
 }
   
