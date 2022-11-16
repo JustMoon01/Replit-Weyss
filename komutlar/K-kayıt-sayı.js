@@ -24,11 +24,11 @@ exports.run = (client, message, args) => {
 
     .setDescription(`${etiketlenenKişi} kullanıcısının
 
-${db.fetch(`kadinTeyit.${etiketlenenKişi.id}`) || 0} kadın,
+${db.fetch(`kadın_${etiketlenenKişi.id}`) || 0} kadın,
 
-${db.fetch(`erkekTeyit.${etiketlenenKişi.id}`) || 0} erkek,
+${db.fetch(`erkek_${etiketlenenKişi.id}`) || 0} erkek,
 
-${db.fetch(`toplamTeyit.${etiketlenenKişi.id}`) || 0} toplam
+${db.fetch(`kayıtsayı_${etiketlenenKişi.id}`) || 0} toplam
 
 kaydı var.`)
 

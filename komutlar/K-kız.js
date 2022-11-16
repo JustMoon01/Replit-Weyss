@@ -67,7 +67,7 @@ const başarılı = new discord.MessageEmbed()
 .setFooter(`Komut ${message.author.tag} Tarafından Kullanıldı ! `)
 
 message.channel.send(başarılı)
-
+db.add(`kadın_${message.author.id}`, 1);
 db.add(`kayıtsayı_${message.author.id}`, 1)
 
 }
