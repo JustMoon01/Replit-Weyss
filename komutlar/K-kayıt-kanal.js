@@ -6,19 +6,19 @@ exports.run = async(client, message, args) => {
 
   if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(` Bu komutu kullanabilmek için "\`yönetici\`" yetkisine sahip olmalısın`);
 
-let rol = message.mentions.roles.first();   
+let kanal = message.mentions.channels.first();   
 
-if (!rol) {
+if (!kanal) {
 
   const weyss = new discord.MessageEmbed()
 
 .setAuthor(client.user.username, client.user.avatarURL)  
 
-.setTitle(`${client.user.username} - Alınacak Rol Ayarla `)
+.setTitle(`${client.user.username} - Kayıt Kanal Ayarla `)
 
 .setColor('BLACK')
 
-.setDescription(`Kayıttan Sonra Alınacak Rolü Belirtiniz ! `)
+.setDescription(`Ayarlayacağınız Kayıt Kanalını Belirtiniz ! `)
 
 .setThumbnail(client.user.avatarURL)
 
@@ -28,17 +28,17 @@ message.channel.send(weyss)
 
 }
 
-db.set(`arol_${message.guild.id}`, rol.id)
+db.set(`kayitkanal_${message.guild.id}`, kanal.id)
 
 const weysss = new discord.MessageEmbed()
 
 .setAuthor(client.user.username, client.user.avatarURL)  
 
-.setTitle(`${client.user.username} - Alınacak Rol Ayarlandı `)
+.setTitle(`${client.user.username} - Kayıt Kanalı Ayarlandı `)
 
 .setColor('BLACK')
 
-.setDescription(`Alınacak Rolü Başarıyla ${rol} Olarak Ayarladım! Ve Servere Biri Gireceği Zaman Bu Rolü Verecem! `)
+.setDescription(`Kayıt Kanalı Başarıyla ${kanal} Olarak Ayarlandı ! `)
 
 .setThumbnail(client.user.avatarURL)
 
@@ -56,7 +56,7 @@ exports.conf = {
 
   guildonly: false,
 
-  aliases: ['alınacakrol', 'arol', 'a-rol'],
+  aliases: ['kayıtkanal', 'k-kanal', 'kkanal'],
 
   permlevel: 0
 
@@ -64,7 +64,7 @@ exports.conf = {
 
 exports.help = {
 
-  name: 'alınacak-rol',
+  name: 'kayıt-kanal',
 
   description: 'erkek rolünü ayarlar',
 

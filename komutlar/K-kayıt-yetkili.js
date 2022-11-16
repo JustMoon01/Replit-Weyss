@@ -14,11 +14,11 @@ if (!rol) {
 
 .setAuthor(client.user.username, client.user.avatarURL)  
 
-.setTitle(`${client.user.username} - Alınacak Rol Ayarla `)
+.setTitle(`${client.user.username} - Kayıt Yetkili Ayarla `)
 
 .setColor('BLACK')
 
-.setDescription(`Kayıttan Sonra Alınacak Rolü Belirtiniz ! `)
+.setDescription(`Ayarlayacağınız Kayıt Yetkili Rolünü Belirtiniz ! `)
 
 .setThumbnail(client.user.avatarURL)
 
@@ -28,17 +28,17 @@ message.channel.send(weyss)
 
 }
 
-db.set(`arol_${message.guild.id}`, rol.id)
+db.set(`erkekrol_${message.guild.id}`, rol.id)
 
 const weysss = new discord.MessageEmbed()
 
 .setAuthor(client.user.username, client.user.avatarURL)  
 
-.setTitle(`${client.user.username} - Alınacak Rol Ayarlandı `)
+.setTitle(`${client.user.username} - Erkek Rol Ayarlandı `)
 
 .setColor('BLACK')
 
-.setDescription(`Alınacak Rolü Başarıyla ${rol} Olarak Ayarladım! Ve Servere Biri Gireceği Zaman Bu Rolü Verecem! `)
+.setDescription(`Erkek Rolü Başarıyla ${rol} Olarak Ayarlandı ! `)
 
 .setThumbnail(client.user.avatarURL)
 
@@ -56,7 +56,7 @@ exports.conf = {
 
   guildonly: false,
 
-  aliases: ['alınacakrol', 'arol', 'a-rol'],
+  aliases: ['kayıtyetkili', 'kyetkili', 'k-yetkili'],
 
   permlevel: 0
 
@@ -64,7 +64,7 @@ exports.conf = {
 
 exports.help = {
 
-  name: 'alınacak-rol',
+  name: 'kayıt-yetkili',
 
   description: 'erkek rolünü ayarlar',
 
