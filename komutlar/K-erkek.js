@@ -79,7 +79,7 @@ exports.run = async (client, message, args) => {
     .setFooter(`Komut ${message.author.tag} Tarafından Kullanıldı ! `);
 
   message.channel.send(weysskayit);
-
+  db.add(`erkek_${message.author.id}`, 1);
   db.add(`kayıtsayı_${message.author.id}`, 1);
 };
 

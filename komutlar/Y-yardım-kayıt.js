@@ -42,7 +42,7 @@ exports.run = (client, message) => {
 
 ║**»** **${prefix}k (İsim) (Yaş) ** : Kız Kayıt Yapar.
 
-║
+║**»** **${prefix}kayıt-sıfırla ** : Kayıt Veritabanını Sıfırlar.
 
 ╚════════════════════════════════════╝
 
